@@ -1,27 +1,38 @@
 import React,{useState} from 'react';
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import M from 'materialize-css'
 const Signup = ()=>{
+    const history = useHistory();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const sendData = ()=>{
+        // checking for valid email using regex expression
+        if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)){
+            M.toast({html:"Invalid email...",classes:"#e53935 red darken-1"});
+            return
+        }
         fetch('/user/signup',{
             method:'post',
             headers:{
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({
-                firstName:'',
-                lastName:'',
-                email:'',
-                password:''
+                firstName,
+                lastName,
+                email,
+                password
             })
         }).then(res=>res.json())
         .then(data=>{
+            console.log(data);
             if(data.error){
-                  M.toast({html:data.error});
+                  M.toast({html:data.message,classes:"#e53935 red darken-1"});
+            }
+            else{
+                M.toast({html:data.message,classes:"#4caf50 green"});
+                history.push('/login');
             }
         })
     }
