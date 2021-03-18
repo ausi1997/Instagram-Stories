@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();           // importing the required modules
 const bodyParser = require('body-parser');
-const cors = require('cors');
+//const cors = require('cors');
 
 // importing the  db module
 const db = require('./models/db');
@@ -10,7 +10,7 @@ const userRoutes = require('./routes/user');
 
 const postRoutes = require('./routes/post');
 
-app.use(cors());
+//app.use(cors());
 
  // parse requests of content-type - application/json
  app.use(bodyParser.json());
