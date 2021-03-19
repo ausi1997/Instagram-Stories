@@ -1,9 +1,5 @@
 const Post = require('../models/postModel');  // importing the post module
 const requireLogin = require('../middleware/auth');
-const multer = require('multer');
-const shortid = require('shortid');
-const path = require('path');
-
 // default function
 
 exports.defaultroute = (req,res)=>{
@@ -15,23 +11,12 @@ exports.defaultroute = (req,res)=>{
 }
 // creating a storage where post images will be stored
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, path.join(path.dirname(__dirname), 'uploads')) // joining the dir path
-    },
-    filename: function (req, file, cb) {    // generating a id for file name
-      cb(null, shortid.generate()+ '-' + file.originalname)
-    }
-  });
-  exports.upload = multer({storage});
-  
-
 // function to create post
 
 exports.createPost = (req,res)=>{
-    const {title,body} = req.body
-    const photo = req.file
-    if(!title || !body || !photo){    
+    const {title,body,pic} = req.body
+    console.log(title,body,pic);
+    if(!title || !body || !pic){    
         return res.json({
             status:false,
             message:'Please add the fields...'
@@ -40,7 +25,7 @@ exports.createPost = (req,res)=>{
     const post = new Post({  // creating a new post
         title,
         body,
-        photo:req.file.path,
+        photo:pic,
         postedBy:req.user  // this will give that which user has posted this post
     });
     post.save().then(result=>{  // saving the data in database

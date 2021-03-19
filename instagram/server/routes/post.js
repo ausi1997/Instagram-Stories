@@ -10,7 +10,7 @@ const requireLogin = require('../middleware/auth');
 router.all('/', requireLogin ,defaultRoute.defaultroute);
 
 // createpost route
-router.post('/create',requireLogin,defaultRoute.upload.single('photo'), defaultRoute.createPost);
+router.post('/create',requireLogin, defaultRoute.createPost);
 
 // view all post
 router.get('/view', defaultRoute.viewpost);
