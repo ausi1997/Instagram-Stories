@@ -22,7 +22,7 @@ const CreatePost = ()=>{
             })
         }).then(res=>res.json())
         .then(data=>{
-            console.log(data);
+          //  console.log(data);
             if(data.error){
                   M.toast({html:data.message,classes:"#e53935 red darken-1"});
     
@@ -34,9 +34,8 @@ const CreatePost = ()=>{
         })}
       
     },[picUrl])
-    const postDetails = async()=>{
-        try{
-        const data =  await new FormData();
+    const postDetails = ()=>{
+        const data =   new FormData();
         data.append("file", image);
         data.append("upload_preset","instagram-clone")
         data.append("cloud_name","dj0jmz1eg")
@@ -45,9 +44,9 @@ const CreatePost = ()=>{
             body:data
         }).then(res=>{
             res.json()
-            .then(data=>{
-                setPicUrl(data.url);
-               console.log(data);
+            .then(datas=>{
+                console.log(datas.url);
+             setPicUrl(datas.url);
                console.log(picUrl);
                console.log(title);
             })
@@ -55,10 +54,7 @@ const CreatePost = ()=>{
         }).catch(err=>{
             console.log(err);
         })
-    }
-    catch(err){
-        console.log(err);
-    } 
+
     }
     return(
 <div className="card input-field">

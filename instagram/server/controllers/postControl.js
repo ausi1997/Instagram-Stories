@@ -30,6 +30,7 @@ exports.createPost = (req,res)=>{
     });
     post.save().then(result=>{  // saving the data in database
         res.json({
+            message:"posted successfully...",
             post:result
         });
     })
