@@ -43,7 +43,7 @@ const Signup = ()=>{
         <input type="text" placeholder="firstname" value={firstName} onChange={(e)=>setFirstName(e.target.value)}></input>
         <input type="text" placeholder="lastname" value={lastName} onChange={(e)=>setLastName(e.target.value)}></input>
         <input type="text" placeholder="email" value={email} onChange={(e)=>setEmail(e.target.value)}></input>
-        <input type="text" placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)}></input>
+        <input type="password" placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)}></input>
         <button class="btn waves-effect waves-light #64b5f6 blue lighten-2" type="submit" name="action" onClick={()=>sendData()}>
         Signup
         </button>
