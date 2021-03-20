@@ -45,9 +45,9 @@ exports.createPost = (req,res)=>{
 
 exports.viewpost = (req,res)=>{
     Post.find()
-  //  .populate("postedBy", "_id firstName")
+   .populate("postedBy", "_id firstName")
     .then(posts=>{
-        return res.json(posts);
+        return res.json(posts)
     })
     .catch(err=>{
         return res.json(err);

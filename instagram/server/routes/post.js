@@ -13,7 +13,7 @@ router.all('/', requireLogin ,defaultRoute.defaultroute);
 router.post('/create',requireLogin, defaultRoute.createPost);
 
 // view all post
-router.get('/view', defaultRoute.viewpost);
+router.get('/view',requireLogin, defaultRoute.viewpost);
 
 // view my post
 router.get('/mypost',requireLogin, defaultRoute.mypost);

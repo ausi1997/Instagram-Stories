@@ -26,7 +26,7 @@ const postSchema = new mongoose.Schema({ // defining the user data model
     }],
     postedBy:{
         type:ObjectId,   // building the relation
-        ref:'User'
+        ref:'user'
     },
     timestamps:{
         type:Date,
