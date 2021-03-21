@@ -1,5 +1,6 @@
 const Post = require('../models/postModel');  // importing the post module
 const requireLogin = require('../middleware/auth');
+const router = require('../routes/post');
 // default function
 
 exports.defaultroute = (req,res)=>{
@@ -120,4 +121,25 @@ exports.commentRoute = (req,res)=>{
                 return res.json(result);
             }
         })
+}
+
+// function to delete the post
+
+exports.deletePost = (req,res)=>{
+    Post.findOne({_id:req.params.postId})
+    .populate('postedBy', '_id')
+    .exec((error,post)=>{
+        if(error || !post){
+            return res.json(error)
+        }
+        else if(post.postedBy._id.toString() === req.user._id.toString()){
+            post.remove()
+            .then(result=>{
+                res.json({
+                    message:'Succesfully deleted',
+                    result
+                })
+            })
+        }
+    })
 }

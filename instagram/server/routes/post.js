@@ -27,5 +27,7 @@ router.put('/unlike', requireLogin, defaultRoute.unlikes);
 // route to comment on the post
 router.put('/comment', requireLogin, defaultRoute.commentRoute);
 
+// route to delete a post
+router.delete('/delete' , requireLogin,defaultRoute.deletePost);
 
 module.exports=router;
