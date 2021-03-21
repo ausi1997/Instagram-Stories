@@ -33,7 +33,7 @@ const Home = ()=>{
   }).then(res=>
       res.json()
   ).then(result=>{
-     console.log(result);
+    // console.log(result);
     const newData = data.map(item=>{
         if(item._id==result._id){
             return result
@@ -71,6 +71,32 @@ const Home = ()=>{
     setData(newData);
     })
    }
+//comment section
+   const comment = (text,id)=>{
+       fetch('/post/comment',{
+        method:"put",
+        headers:{
+            "Content-Type":"application/json",
+            "Authorization":"Bearer" + localStorage.getItem("jwt")
+        },
+        body:JSON.stringify({
+            postId:id,
+            text:text
+        })
+       }).then(res=>res.json())
+       .then(result=>{
+           console.log(result);
+           const newData = data.map(item=>{
+            if(item._id==result._id){
+                return result
+            }
+            else{
+                return item
+            }
+        })
+        setData(newData);
+       })
+   }
     return(
         <div className="home">
         {    data&&
@@ -82,7 +108,6 @@ const Home = ()=>{
                     <img src={item.photo}></img>
                     </div>
                     <div className="card-content">
-                    <i className="material-icons" style={{color:"red"}}>favorite</i>
                     {
                         item.likes.includes(state._id)
                         ? <i className="material-icons" onClick={()=>dislike(item._id)}>thumb_down</i>
@@ -93,7 +118,20 @@ const Home = ()=>{
                     <h6>{item.likes.length + " "+ "likes"}</h6>
                     <h6>{item.title}</h6>
                     <p>{item.body}</p>
+                    <h6 style={{fontFamily:"cursive"}}>Comments</h6>
+                    {
+                        item.comment.map(record=>{
+                              return(
+                                  <h6><span style={{fontWeight:"bold"}}>{record.postedBy.firstName}  </span>{record.text}</h6>
+                              )
+                        })
+                    }
+                    <form onSubmit={(e)=>{
+                        e.preventDefault()
+                        comment(e.target[0].value,item._id)
+                    }}>
                     <input type="text" placeholder="add a comment..."></input>
+                    </form>
                     </div>
                     </div>
                 )

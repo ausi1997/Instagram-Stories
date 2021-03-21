@@ -46,6 +46,7 @@ exports.createPost = (req,res)=>{
 exports.viewpost = (req,res)=>{
     Post.find()
    .populate("postedBy", "_id firstName")
+   .populate("comment.postedBy","_id firstName")
     .then(posts=>{
         return res.json(posts)
     })
@@ -78,7 +79,7 @@ exports.likes = (req,res)=>{
             return res.json(err);
         }
         else{
-            return res.json({result});
+            return res.json(result);
         }
     })   
 }
@@ -111,7 +112,7 @@ exports.commentRoute = (req,res)=>{
         $push:{comment:comments}  // using push to add the new comments in the array
         }, {
             new:true  // to update the record
-        }).exec((err,result)=>{
+        }).populate('comment.postedBy','_id firstName').populate('postedBy', '_id firstName').exec((err,result)=>{
             if(err){
                 return res.json(err);
             }
