@@ -28,6 +28,6 @@ router.put('/unlike', requireLogin, defaultRoute.unlikes);
 router.put('/comment', requireLogin, defaultRoute.commentRoute);
 
 // route to delete a post
-router.delete('/delete' , requireLogin,defaultRoute.deletePost);
+router.delete('/delete/:postId' , requireLogin,defaultRoute.deletePost);
 
 module.exports=router;

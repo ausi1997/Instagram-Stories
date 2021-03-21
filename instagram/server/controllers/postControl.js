@@ -135,10 +135,7 @@ exports.deletePost = (req,res)=>{
         else if(post.postedBy._id.toString() === req.user._id.toString()){
             post.remove()
             .then(result=>{
-                res.json({
-                    message:'Succesfully deleted',
-                    result
-                })
+                res.json(result)
             })
         }
     })

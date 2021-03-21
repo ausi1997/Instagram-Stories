@@ -16,7 +16,26 @@ const Profile = ()=>{
             setPics(result.myposts);
             console.log(mypics);
         })
-    },[mypics])
+    },[])
+    const deletePost = (id)=>{
+        fetch(`/post/delete/${id}`,{
+            method:"delete",
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer" + localStorage.getItem("jwt")
+            }
+        }).then(res=>
+            res.json()
+        ).then(result=>{
+           console.log(result);
+           const newData = mypics.filter(item=>{
+               return item._id!== result._id
+           })
+           setPics(newData);
+        })
+       }
+    
+    
     return(
         <div style={{margin:"auto",maxWidth:"650px"}}>
         <div style={{display:"flex",justifyContent:"space-around",margin:"18px 0px",borderBottom:"2px solid black"}}>
@@ -37,7 +56,10 @@ const Profile = ()=>{
         mypics&&
           mypics.map(item=>{
               return(
+             <div>    
+             <i className="small material-icons" onClick={()=>{deletePost(item._id)}}>delete_forever</i> 
              <img className="item" src={item.photo} alt={item.title}></img>
+             </div> 
               )
             })
         }

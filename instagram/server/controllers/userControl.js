@@ -91,7 +91,7 @@ exports.signin = async(req,res)=>{
                     // check password is match or not
                     if(match){
                         // password matched
-                        let token = jwt.sign({_id:result._id}, 'verySecretValue', {expiresIn: '1h'});
+                        let token = jwt.sign({_id:result._id}, 'verySecretValue', {expiresIn: '24h'});
                         const {_id,firstName,lastName,email} = result;
                         return res.json({
                             status:true,
