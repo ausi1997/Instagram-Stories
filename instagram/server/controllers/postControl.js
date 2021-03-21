@@ -78,7 +78,7 @@ exports.likes = (req,res)=>{
             return res.json(err);
         }
         else{
-            return res.json(result);
+            return res.json({result});
         }
     })   
 }
