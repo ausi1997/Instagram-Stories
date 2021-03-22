@@ -143,7 +143,10 @@ exports.otherProfile = async(req,res)=>{
             return res.json(err)
         }
         else{
-            return res.json(user,posts)
+            return res.json({
+                user:user,
+                posts:posts
+            });
         }
     })
    })
