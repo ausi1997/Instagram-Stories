@@ -1,8 +1,10 @@
 const User = require('../models/usermodel'); // importing the user module
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const Post = require('../models/postModel');
 
 const{check,validationResult}= require('express-validator');
+const { post } = require('../routes/post');
 
 
 // defaultroute function
@@ -127,3 +129,26 @@ exports.signin = async(req,res)=>{
 }
 
 
+// to see other user
+
+exports.otherProfile = async(req,res)=>{
+    try{
+   await User.findOne({_id:req.params._id})
+   .select("-password")
+   .then(user=>{
+    Post.find({postedBy:req.params._id})
+    .populate("postedBy", "_id firstName")
+    .exec((err,posts)=>{
+        if(err){
+            return res.json(err)
+        }
+        else{
+            return res.json(user,posts)
+        }
+    })
+   })
+    }
+    catch(err){
+return res.send("error" +err);
+    }
+}
