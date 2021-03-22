@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {ObjectId} = mongoose.Schema.Types
 
 const userSchema = new mongoose.Schema({ // defining the user data model
     firstName:{
@@ -24,6 +25,14 @@ const userSchema = new mongoose.Schema({ // defining the user data model
         type:String,
         required:true,
     },
+    followers:[{
+    type:ObjectId,
+    ref:'user'
+    }],
+    followings:[{
+        type:ObjectId,
+        ref:'user'
+    }],
     timestamps:{
         type:Date,
         default:Date.now()

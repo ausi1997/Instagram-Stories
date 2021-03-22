@@ -17,5 +17,11 @@ router.post('/login', defaultRoute.signin);
 // route to view other profile
 router.get('/profile/:_id',requireLogin,defaultRoute.otherProfile);
 
+// router to follow users
+router.put('/follow',requireLogin,defaultRoute.follow);
+
+// route to unfollow
+router.put('unfollow',requireLogin,defaultRoute.unfollow);
+
 // exporting the router
 module.exports=router;

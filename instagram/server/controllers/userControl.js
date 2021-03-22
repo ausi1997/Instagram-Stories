@@ -155,3 +155,46 @@ exports.otherProfile = async(req,res)=>{
 return res.send("error" +err);
     }
 }
+
+// function to follow users
+
+exports.follow = (req,res)=>{
+    
+      User.findByIdAndUpdate(req.body.followId,{
+         $push:{followers:req.user._id}
+     },{new:true},(error,result)=>{
+         if(error){
+             return res.json(error)
+         }
+         else{
+             User.findByIdAndUpdate(req.user._id,{
+                 $push:{followings:req.body.followId}
+             },{new:true}).then(result=>{
+                 res.json(result)
+             }).catch(err=>{
+                 return res.json(err)
+             })
+         }
+     })
+}
+
+// function to unfollow
+exports.unfollow = (req,res)=>{
+    
+    User.findByIdAndUpdate(req.body.followId,{
+       $pull:{followers:req.user._id}
+   },{new:true},(error,result)=>{
+       if(error){
+           return res.json(error)
+       }
+       else{
+           User.findByIdAndUpdate(req.user._id,{
+               $pull:{followings:req.body.followId}
+           },{new:true}).then(result=>{
+               res.json(result)
+           }).catch(err=>{
+               return res.json(err)
+           })
+       }
+   })
+}
