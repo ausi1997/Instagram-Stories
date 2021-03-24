@@ -7,6 +7,7 @@ const Signup = ()=>{
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [username,setUsername] = useState('');
     const sendData = ()=>{
         // checking for valid email using regex expression
         if(!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)){
@@ -22,6 +23,7 @@ const Signup = ()=>{
                 firstName,
                 lastName,
                 email,
+                username,
                 password
             })
         }).then(res=>res.json())
@@ -43,6 +45,7 @@ const Signup = ()=>{
         <input type="text" placeholder="firstname" value={firstName} onChange={(e)=>setFirstName(e.target.value)}></input>
         <input type="text" placeholder="lastname" value={lastName} onChange={(e)=>setLastName(e.target.value)}></input>
         <input type="text" placeholder="email" value={email} onChange={(e)=>setEmail(e.target.value)}></input>
+        <input type="text" placeholder="username" value={username} onChange={(e)=>setUsername(e.target.value)}></input>
         <input type="password" placeholder="password" value={password} onChange={(e)=>setPassword(e.target.value)}></input>
         <button class="btn waves-effect waves-light #64b5f6 blue lighten-2" type="submit" name="action" onClick={()=>sendData()}>
         Signup

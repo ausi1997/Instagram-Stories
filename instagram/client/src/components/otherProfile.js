@@ -4,9 +4,9 @@ import { UserContext } from '../App';
 
 const OtherProfile = ()=>{
     const [profile,setProfile] = useState(null);
-    const [followButton,setFollowButton] = useState(true);
     const {state,dispatch} = useContext(UserContext);
     const {userid} = useParams();
+    const [followButton,setFollowButton] = useState(true);
     useEffect(()=>{
         fetch(`/user/profile/${userid}`,{
             headers:{
@@ -44,7 +44,7 @@ const OtherProfile = ()=>{
                    }
                }
            })
-           setFollowButton(false);
+           setFollowButton(false)
     })
     
 }

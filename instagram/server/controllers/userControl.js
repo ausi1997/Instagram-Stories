@@ -37,6 +37,8 @@ exports.default = async(req,res)=>{
                     firstName:req.body.firstName,   // then creating the user in database
                    lastName:req.body.lastName,
                    email:req.body.email,
+                   username:req.body.username,
+                   profilePic:req.body.profilePic,
                    password:bcrypt.hashSync(req.body.password, 8) // hashing the password
                 },(error,result)=>{
                     if(!error){ // if all ok
@@ -94,13 +96,13 @@ exports.signin = async(req,res)=>{
                     if(match){
                         // password matched
                         let token = jwt.sign({_id:result._id}, 'verySecretValue', {expiresIn: '24h'});
-                        const {_id,firstName,lastName,email,followers,followings} = result;
+                        const {_id,firstName,lastName,email,username,profilePic,followers,followings} = result;
                         return res.json({
                             status:true,
                             message:'Password matched.... login success....',
                             result:result,
                             token:token,  // it give the token in result
-                            user:{_id,firstName,lastName,email,followers,followings}
+                            user:{_id,firstName,lastName,email,username,profilePic,followers,followings}
                         });
                     }
                     else{
