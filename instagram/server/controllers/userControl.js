@@ -94,13 +94,13 @@ exports.signin = async(req,res)=>{
                     if(match){
                         // password matched
                         let token = jwt.sign({_id:result._id}, 'verySecretValue', {expiresIn: '24h'});
-                        const {_id,firstName,lastName,email} = result;
+                        const {_id,firstName,lastName,email,followers,followings} = result;
                         return res.json({
                             status:true,
                             message:'Password matched.... login success....',
                             result:result,
                             token:token,  // it give the token in result
-                            user:{_id,firstName,lastName,email}
+                            user:{_id,firstName,lastName,email,followers,followings}
                         });
                     }
                     else{

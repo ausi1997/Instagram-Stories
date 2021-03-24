@@ -56,6 +56,21 @@ exports.viewpost = (req,res)=>{
     })
 }
 
+
+// function to get the post of my fillowings
+
+exports.followingpost = (req,res)=>{
+    Post.find({postedBy:{$in:req.user.followings}})
+   .populate("postedBy", "_id firstName")
+   .populate("comment.postedBy","_id firstName")
+    .then(posts=>{
+        return res.json(posts)
+    })
+    .catch(err=>{
+        return res.json(err);
+    })
+}
+
 // function to view only my post
 
 exports.mypost = (req,res)=>{
