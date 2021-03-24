@@ -4,6 +4,7 @@ import { UserContext } from '../App';
 
 const OtherProfile = ()=>{
     const [profile,setProfile] = useState(null);
+    const [followButton,setFollowButton] = useState(true);
     const {state,dispatch} = useContext(UserContext);
     const {userid} = useParams();
     useEffect(()=>{
@@ -15,13 +16,69 @@ const OtherProfile = ()=>{
         .then(result=>{
            console.log(result);
             //console.log(result.myposts);
-        
             setProfile(result);
-            console.log(profile);
         })
     },[])
+
+    const follow = ()=>{
+        fetch('/user/follow',{
+            method:'put',
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization":"Bearer" + localStorage.getItem("jwt")
+            },
+            body:JSON.stringify({
+                followId:userid
+            })
+        }).then(res=>res.json())
+        .then(data=>{
+           console.log(data);
+           dispatch({type:"UPDATE",payload:{followings:data.followings,followers:data.followers}})
+           localStorage.setItem("user",JSON.stringify(data))
+           setProfile((prevState)=>{
+               return{
+                   ...prevState,
+                   user:{
+                       ...prevState.user,
+                       followers:[...prevState.user.followers,data._id]
+                   }
+               }
+           })
+           setFollowButton(false);
+    })
     
-    
+}
+
+const unfollow = ()=>{
+    fetch('/user/unfollow',{
+        method:'put',
+        headers:{
+            "Content-Type":"application/json",
+            "Authorization":"Bearer" + localStorage.getItem("jwt")
+        },
+        body:JSON.stringify({
+            followId:userid
+        })
+    }).then(res=>res.json())
+    .then(data=>{
+       console.log(data);
+       dispatch({type:"UPDATE",payload:{followings:data.followings,followers:data.followers}})
+       localStorage.setItem("user",JSON.stringify(data))
+       setProfile((prevState)=>{
+           const updateFollowers = prevState.user.followers.filter(item=>
+               item!=data._id
+           )
+           return{
+               ...prevState,
+               user:{
+                   ...prevState.user,
+                   followers:updateFollowers
+               }
+           }
+       })
+})
+
+}
     
     return(
         <div style={{margin:"auto",maxWidth:"650px"}}>
@@ -33,9 +90,19 @@ const OtherProfile = ()=>{
         <div><h4>{profile&& profile.user.firstName + " " + profile.user.lastName}</h4>
         <div style={{display:"flex",justifyContent:"space-between",width:"115%"}}>
         <h5>{profile&& profile.posts.length} posts</h5>
-        <h5> 200 followers</h5>
-        <h5>250 following</h5>
+        <h5> {profile && profile.user.followers.length} followers</h5>
+        <h5>{profile && profile.user.followings.length} followings</h5>
         </div>
+        {
+            followButton?
+            <button style={{margin:"10px"}} class="btn waves-effect waves-light #64b5f6 blue lighten-2" type="submit" name="action" onClick={()=>follow()}>
+        Follow
+        </button>
+        :
+        <button style={{margin:"10px"}} class="btn waves-effect waves-light #64b5f6 blue lighten-2" type="submit" name="action" onClick={()=>unfollow()}>
+        UnFollow
+        </button>
+        }
         </div>
         </div>
         <div className="gallery">

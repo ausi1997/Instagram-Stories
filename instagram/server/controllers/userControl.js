@@ -169,7 +169,7 @@ exports.follow = (req,res)=>{
          else{
              User.findByIdAndUpdate(req.user._id,{
                  $push:{followings:req.body.followId}
-             },{new:true}).then(result=>{
+             },{new:true}).select("-password").then(result=>{
                  res.json(result)
              }).catch(err=>{
                  return res.json(err)
@@ -190,7 +190,7 @@ exports.unfollow = (req,res)=>{
        else{
            User.findByIdAndUpdate(req.user._id,{
                $pull:{followings:req.body.followId}
-           },{new:true}).then(result=>{
+           },{new:true}).select("-password").then(result=>{
                res.json(result)
            }).catch(err=>{
                return res.json(err)

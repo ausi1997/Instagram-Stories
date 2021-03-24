@@ -21,7 +21,7 @@ router.get('/profile/:_id',requireLogin,defaultRoute.otherProfile);
 router.put('/follow',requireLogin,defaultRoute.follow);
 
 // route to unfollow
-router.put('unfollow',requireLogin,defaultRoute.unfollow);
+router.put('/unfollow',requireLogin,defaultRoute.unfollow);
 
 // exporting the router
 module.exports=router;
