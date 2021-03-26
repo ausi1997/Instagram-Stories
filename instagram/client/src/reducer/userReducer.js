@@ -13,6 +13,12 @@ const reducer = (state,action)=>{
             followings:action.payload.followings
         }
     }
+    else if (action.type=="UPDATEPIC"){
+        return{
+          ...state,   
+            profilePic:action.payload
+        }
+    }
     else{
         return state;
     }
