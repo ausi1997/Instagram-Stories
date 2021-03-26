@@ -23,5 +23,8 @@ router.put('/follow',requireLogin,defaultRoute.follow);
 // route to unfollow
 router.put('/unfollow',requireLogin,defaultRoute.unfollow);
 
+// route to update the profile pic
+router.put('/updatePic',requireLogin,defaultRoute.updatePic);
+
 // exporting the router
 module.exports=router;

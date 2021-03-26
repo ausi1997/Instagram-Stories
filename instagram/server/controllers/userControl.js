@@ -200,3 +200,18 @@ exports.unfollow = (req,res)=>{
        }
    })
 }
+
+// function to update your profile pic
+
+exports.updatePic = (req,res)=>{
+    User.findByIdAndUpdate({_id:req.user._id},{
+        $set:{profilePic:req.body.profilePic}
+    },{new:true},(error,result)=>{
+        if(error){
+            return res.json(error);
+        }
+        else{
+            return res.json(result);
+        }
+    })
+}
