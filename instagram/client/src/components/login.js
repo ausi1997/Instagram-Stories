@@ -29,6 +29,12 @@ const Login = ()=>{
                   M.toast({html:data.message,classes:"#e53935 red darken-1"});
                   history.push('/login');
             }
+            else if(data.token == null || data.token == undefined){
+                M.toast({html:data.message,classes:"#e53935 red darken-1"});
+                setEmail('');
+                setPassword('');
+                history.push('/login');
+            }
             else{
                 localStorage.setItem("jwt",data.token)
                 localStorage.setItem("user",JSON.stringify(data.user))

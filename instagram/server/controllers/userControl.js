@@ -38,7 +38,7 @@ exports.default = async(req,res)=>{
                    lastName:req.body.lastName,
                    email:req.body.email,
                    username:req.body.username,
-                   profilePic:req.body.profilePic,
+              //     profilePic:req.body.profilePic,
                    password:bcrypt.hashSync(req.body.password, 8) // hashing the password
                 },(error,result)=>{
                     if(!error){ // if all ok

@@ -28,10 +28,9 @@ const postSchema = new mongoose.Schema({ // defining the user data model
         type:ObjectId,   // building the relation
         ref:'user'
     },
-    timestamps:{
-        type:Date,
-        default:Date.now()
-    }
+  //  timestamps:true
+},{
+    timestamps:true
 });
 
 // creating user model

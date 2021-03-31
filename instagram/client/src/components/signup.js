@@ -31,10 +31,15 @@ const Signup = ()=>{
             console.log(data);
             if(data.error){
                   M.toast({html:data.message,classes:"#e53935 red darken-1"});
+               //  history.push('/singup');
+            }
+            else if(data.status == true){
+                M.toast({html:data.message,classes:"#4caf50 green"});
+                history.push('/login');
             }
             else{
                 M.toast({html:data.message,classes:"#4caf50 green"});
-                history.push('/login');
+                history.push('/signup');
             }
         })
     }

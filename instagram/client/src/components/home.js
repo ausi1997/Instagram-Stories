@@ -111,19 +111,19 @@ const Home = ()=>{
                     <div className="card-content">
                     {
                         item.likes.includes(state._id)
-                        ? <i className="material-icons" onClick={()=>dislike(item._id)}>thumb_down</i>
-                        : <a><i className="material-icons" onClick={()=>like(item._id)}>thumb_up</i></a>
+                        ? <Link><i className="material-icons" onClick={()=>dislike(item._id)}>thumb_down</i></Link>
+                        : <Link><i className="material-icons" onClick={()=>like(item._id)}>thumb_up</i></Link>
                     }
                     
                     
-                    <h6>{item.likes.length + " "+ "likes"}</h6>
-                    <h6>{item.title}</h6>
-                    <p>{item.body}</p>
+                    <h6 style={{fontStyle:"italic"}}>{item.likes.length + " "+ "likes"}</h6>
+                    <h6 style={{fontFamily:"cursive"}}>{item.title}</h6>
+                    <p style={{fontStyle:"italic"}}>{item.body}</p>
                     <h6 style={{fontFamily:"cursive"}}>Comments</h6>
                     {
                         item.comment.map(record=>{
                               return(
-                                  <h6><span style={{fontWeight:"bold"}}>{record.postedBy.firstName}  </span>{record.text}</h6>
+                                  <h6 style={{fontStyle:"italic"}} ><span style={{fontWeight:"bold" ,fontFamily:"cursive"}}>{record.postedBy.firstName}  </span>{record.text}</h6>
                               )
                         })
                     }
