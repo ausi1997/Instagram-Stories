@@ -221,8 +221,9 @@ exports.updatePic = (req,res)=>{
 exports.search = (req,res)=>{
     let usersearch = new RegExp("^" + req.body.query)
     User.find({username:{$regex:usersearch}})
+    .select("_id username profilePic")
     .then(user=>{
-        res.json({user})
+        res.json(user)
     }).catch(err=>{
         console.log(err);
     })
