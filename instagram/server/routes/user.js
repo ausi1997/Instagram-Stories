@@ -26,5 +26,7 @@ router.put('/unfollow',requireLogin,defaultRoute.unfollow);
 // route to update the profile pic
 router.put('/updatePic',requireLogin,defaultRoute.updatePic);
 
+// route to search a user
+router.post('/search-users',requireLogin,defaultRoute.search);
 // exporting the router
 module.exports=router;

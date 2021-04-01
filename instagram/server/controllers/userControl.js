@@ -215,3 +215,15 @@ exports.updatePic = (req,res)=>{
         }
     })
 }
+
+// function to search users
+
+exports.search = (req,res)=>{
+    let usersearch = new RegExp("^" + req.body.query)
+    User.find({username:{$regex:usersearch}})
+    .then(user=>{
+        res.json({user})
+    }).catch(err=>{
+        console.log(err);
+    })
+}

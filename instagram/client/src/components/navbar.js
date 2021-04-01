@@ -8,10 +8,11 @@ const Navbar = ()=>{
   const render = ()=>{
     if(state){
       return[
-        <li><Link to="/">Home</Link></li>,
-          <li><Link to="/profile" >Profile</Link></li>,
-        <li><Link to="/create" >Create</Link></li>,
-        <li> <button class="btn waves-effect waves-light #64b5f6 blue lighten-2" type="submit" name="action"
+        <li key="1"><i className="material-icons" style={{color:"black"}}>search</i></li>,
+        <li key="2"><Link to="/">Home</Link></li>,
+          <li key="3"><Link to="/profile" >Profile</Link></li>,
+        <li key="4"><Link to="/create" >Create</Link></li>,
+        <li key="5"> <button class="btn waves-effect waves-light #64b5f6 blue lighten-2" type="submit" name="action"
           onClick={()=>{
             localStorage.clear()
             dispatch({type:"CLEAR"})

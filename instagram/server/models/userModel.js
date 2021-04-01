@@ -23,7 +23,8 @@ const userSchema = new mongoose.Schema({ // defining the user data model
     },
     username:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     password:{
         type:String,
