@@ -86,7 +86,7 @@ const unfollow = ()=>{
         <div style={{display:"flex",justifyContent:"space-around",margin:"18px 0px",borderBottom:"2px solid black"}}>
         <div>
         <img style={{width:"160px",height:"160px",borderRadius:"80px"}}
-         src="https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTF8fHBlcnNvbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"></img>
+         src={profile&& profile.user.profilePic}></img>
         </div>
         <div><h4>{profile&& profile.user.firstName + " " + profile.user.lastName}</h4>
         <div style={{display:"flex",justifyContent:"space-between",width:"115%"}}>

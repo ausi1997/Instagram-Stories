@@ -20,11 +20,11 @@ margin-top: 30px;
 }
 
 .home-card{
-  max-width: 500px;
+  max-width: 400px;
   margin: 26px auto;
 }
 .card-image img{
-  max-width: 500px;
+  max-width: 400px;
 }
 .gallery{
   display: flex;

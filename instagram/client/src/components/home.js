@@ -104,7 +104,7 @@ const Home = ()=>{
             data.map(item=>{
                 return(
                     <div className="home-card">
-                    <h5><Link to={item.postedBy._id!==state._id?'/profile/'+ item.postedBy._id:'/profile'}>{item.postedBy.firstName}</Link></h5>
+                    <h5><Link to={item.postedBy._id!==state._id?'/profile/'+ item.postedBy._id:'/profile'}>{item.postedBy.username}</Link></h5>
                     <div className="card-image">
                     <img src={item.photo}></img>
                     </div>

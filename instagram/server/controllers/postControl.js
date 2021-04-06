@@ -46,8 +46,8 @@ exports.createPost = (req,res)=>{
 
 exports.viewpost = (req,res)=>{
     Post.find()
-   .populate("postedBy", "_id firstName")
-   .populate("comment.postedBy","_id firstName")
+   .populate("postedBy", "_id firstName username")
+   .populate("comment.postedBy","_id firstName username")
   .sort("-createdAt")
     .then(posts=>{
         return res.json(posts)
