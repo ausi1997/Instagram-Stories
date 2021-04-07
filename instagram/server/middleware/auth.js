@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = mongoose.model('user');
+const {JWT_SECRET} = require('../config/key');
 module.exports = (req,res,next)=>{
     const {authorization} = req.headers
     if(!authorization){
@@ -9,7 +10,7 @@ module.exports = (req,res,next)=>{
         });
     }
     const token =  authorization.replace('Bearer', '')
-    jwt.verify(token, 'verySecretValue', (error,payload)=>{
+    jwt.verify(token, JWT_SECRET, (error,payload)=>{
         if(error){
             return res.json({
                 message:'you must be logged in...'

@@ -5,9 +5,9 @@ import { useHistory } from "react-router-dom";
 const CreatePost = ()=>{
     const history = useHistory();
     const [title,setTitle] = useState('');
-    const [body, setBody]  = useState('');
-    const [image, setImage]= useState('');
-    const [picUrl, setPicUrl] = useState('');
+    const [body,setBody]  = useState('');
+    const [image,setImage]= useState('');
+    const [picUrl,setPicUrl] = useState('');
     useEffect(()=>{
         if(picUrl){  fetch('/post/create',{
             method:'post',
