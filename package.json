@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "instagram-stories",
   "version": "0.1.0",
   "private": true,
   "proxy":"https://instagram-ausi.herokuapp.com/",
