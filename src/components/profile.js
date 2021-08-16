@@ -19,7 +19,7 @@ const Profile = ()=>{
             setPics(result.myposts);
             console.log(mypics);
         })
-    },[])
+    },[mypics])
     const deletePost = (id)=>{
         fetch(`/post/delete/${id}`,{
             method:"delete",
@@ -73,7 +73,7 @@ const Profile = ()=>{
                 console.log(err);
             })
            }
-       },[image])
+       },[image,state,dispatch])
 
        const updatePic = (file)=>{
         setImage(file)
@@ -85,7 +85,7 @@ const Profile = ()=>{
         <div style={{display:"flex",justifyContent:"space-around",margin:"18px 0px",borderBottom:"2px solid black"}}>
         <div>
         <img style={{width:"160px",height:"160px",borderRadius:"80px"}}
-         src={state?state.profilePic:"loading..."}></img>
+         src={state?state.profilePic:"loading..."} alt="loading..."></img>
          <div className="file-field input-field">
 <div className="btn waves-effect waves-light #64b5f6 blue lighten-2">
   <span>Update</span>

@@ -33,7 +33,7 @@ const CreatePost = ()=>{
             }
         })}
       
-    },[picUrl])
+    },[picUrl,body,title,history])
     const postDetails = ()=>{
         const data =   new FormData();
         data.append("file", image);

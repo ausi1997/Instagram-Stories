@@ -4,7 +4,7 @@ import { UserContext } from '../App';
 
 const OtherProfile = ()=>{
     const [profile,setProfile] = useState(null);
-    const {state,dispatch} = useContext(UserContext);
+    const {dispatch} = useContext(UserContext);
     const {userid} = useParams();
     const [followButton,setFollowButton] = useState(true);
     useEffect(()=>{
@@ -18,7 +18,7 @@ const OtherProfile = ()=>{
             //console.log(result.myposts);
             setProfile(result);
         })
-    },[])
+    },[userid])
 
     const follow = ()=>{
         fetch('/user/follow',{
@@ -66,7 +66,7 @@ const unfollow = ()=>{
        localStorage.setItem("user",JSON.stringify(data))
        setProfile((prevState)=>{
            const updateFollowers = prevState.user.followers.filter(item=>
-               item!=data._id
+               item!==data._id
            )
            return{
                ...prevState,
@@ -86,7 +86,7 @@ const unfollow = ()=>{
         <div style={{display:"flex",justifyContent:"space-around",margin:"18px 0px",borderBottom:"2px solid black"}}>
         <div>
         <img style={{width:"160px",height:"160px",borderRadius:"80px"}}
-         src={profile&& profile.user.profilePic}></img>
+         src={profile&& profile.user.profilePic} alt="loading..."></img>
         </div>
         <div><h4>{profile&& profile.user.firstName + " " + profile.user.lastName}</h4>
         <div style={{display:"flex",justifyContent:"space-between",width:"115%"}}>

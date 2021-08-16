@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 const Home = ()=>{
     const [data,setData] = useState([]);
-    const {state,dispatch} = useContext(UserContext);
+    const {state} = useContext(UserContext);
  useEffect(()=>{
   fetch('/post/view',{
       headers:{
@@ -36,7 +36,7 @@ const Home = ()=>{
   ).then(result=>{
     // console.log(result);
     const newData = data.map(item=>{
-        if(item._id==result._id){
+        if(item._id===result._id){
             return result
         }
         else{
@@ -62,7 +62,7 @@ const Home = ()=>{
     ).then(result=>{
        console.log(result);
       const newData = data.map(item=>{
-        if(item._id==result._id){
+        if(item._id===result._id){
             return result
         }
         else{
@@ -88,7 +88,7 @@ const Home = ()=>{
        .then(result=>{
            console.log(result);
            const newData = data.map(item=>{
-            if(item._id==result._id){
+            if(item._id===result._id){
                 return result
             }
             else{
@@ -106,7 +106,7 @@ const Home = ()=>{
                     <div className="home-card">
                     <h5><Link to={item.postedBy._id!==state._id?'/profile/'+ item.postedBy._id:'/profile'}>{item.postedBy.username}</Link></h5>
                     <div className="card-image">
-                    <img src={item.photo}></img>
+                    <img src={item.photo} alt="loading..."></img>
                     </div>
                     <div className="card-content">
                     {
@@ -116,7 +116,7 @@ const Home = ()=>{
                     }
                     
                     
-                    <h6 style={{fontStyle:"italic"}}>{item.likes.length + " "+ "likes"}</h6>
+                    <h6 style={{fontStyle:"italic"}}>{item.likes.length + "likes"}</h6>
                     <h6 style={{fontFamily:"cursive"}}>{item.title}</h6>
                     <p style={{fontStyle:"italic"}}>{item.body}</p>
                     <h6 style={{fontFamily:"cursive"}}>Comments</h6>

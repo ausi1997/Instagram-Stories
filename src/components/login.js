@@ -3,7 +3,7 @@ import {Link, useHistory} from 'react-router-dom';
 import M from 'materialize-css';
 import { UserContext } from '../App';
 const Login = ()=>{
-    const {state,dispatch} = useContext(UserContext)
+    const {dispatch} = useContext(UserContext)
     const history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -29,7 +29,7 @@ const Login = ()=>{
                   M.toast({html:data.message,classes:"#e53935 red darken-1"});
                   history.push('/login');
             }
-            else if(data.token == null || data.token == undefined){
+            else if(data.token === null || data.token === undefined){
                 M.toast({html:data.message,classes:"#e53935 red darken-1"});
                 setEmail('');
                 setPassword('');
